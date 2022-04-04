@@ -1,0 +1,42 @@
+<a href="../" class="btn btn-danger">Na rozcestnik</a>
+<a href="../logout.php" class="btn btn-warning">Odhlásit</a>
+<a href="../reset.php" class="btn btn-info">Změna hesla</a>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Job</th>
+        <th>Wage</th>
+        <th>Room</th>
+    </tr>
+
+    </thead>
+    <tbody>
+    {{# employees }}
+        <tr>
+            <td>{{ name }}</td>
+            <td>{{ surname }}</td>
+            <td>{{ job }}</td>
+            <td>{{ wage }}</td>
+            <td>{{ room }}</td>
+            <td>
+                {{#op}}
+                <form method="post" action="deleteEmployee.php" onsubmit="return confirm('Opravdu chcete převést zaměstnance?\n Akce je nevratná')">
+                    <input type="hidden" name="employee_id" value="{{employee_id}}"/>
+                    <input type="submit" value="Převést zaměstnance do jiné sféry" class="btn btn-success">
+                </form>
+
+                <form method="post" action="updateEmployee.php">
+                    <input type="hidden" name="employee_id" value="{{employee_id}}"/>
+                    <input type="submit" value="update" class="btn btn-primary">
+                </form>
+                {{/op}}
+            </td>
+        </tr>
+    {{/ employees }}
+    </tbody>
+</table>
+{{#op}}
+    <a href="insertEmployee.php" class="btn btn-primary">New Employee</a>
+{{/op}}

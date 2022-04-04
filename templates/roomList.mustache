@@ -1,0 +1,39 @@
+<a href="../" class="btn btn-danger">Na rozcestnik</a>
+<a href="../logout.php" class="btn btn-warning">Odhlásit</a>
+<a href="../reset.php" class="btn btn-info">Změna hesla</a>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Number</th>
+        <th>Phone</th>
+        <th>Actions</th>
+    </tr>
+    
+    </thead>
+    <tbody>
+    {{# rooms }}
+        <tr>
+            <td>{{ name }}</td>
+            <td>{{ no }}</td>
+            <td>{{ phone }}</td>
+            <td>
+                {{#op}}
+                <form method="post" action="delete.php" onsubmit="return confirm('Opravdu chcete převést místnost?\n Akce je nevratná')">
+                    <input type="hidden" name="room_id" value="{{room_id}}"/>
+                    <input type="submit" value="Převést místnost do jiné sféry" class="btn btn-success">
+                </form>
+
+                <form method="post" action="update.php">
+                    <input type="hidden" name="room_id" value="{{room_id}}"/>
+                    <input type="submit" value="update" class="btn btn-primary">
+                </form>
+                {{/op}}
+            </td>
+        </tr>
+    {{/ rooms }}
+    </tbody>
+</table>
+{{#op}}
+    <a href="insert.php" class="btn btn-primary">New Room</a>
+{{/op}}
